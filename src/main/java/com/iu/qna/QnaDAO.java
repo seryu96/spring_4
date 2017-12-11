@@ -1,4 +1,4 @@
-package com.iu.notice;
+package com.iu.qna;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,13 +13,12 @@ import com.iu.board.BoardDAO;
 import com.iu.board.BoardDTO;
 import com.iu.util.RowNum;
 
-
 @Repository
-public class NoticeDAO implements BoardDAO{
-	
+public class QnaDAO implements BoardDAO {
+
 	@Inject
-	private SqlSession sqlSession; 
-	private static final String namespace = "noticeMapper.";
+	private SqlSession sqlSession;
+	private static final String namespace = "qnaMapper.";
 	
 	@Override
 	public List<BoardDTO> selectList(RowNum rowNum) throws Exception {
@@ -29,7 +28,7 @@ public class NoticeDAO implements BoardDAO{
 		map.put("kind", rowNum.getKind());
 		map.put("search", rowNum.getSearch());
 		
-		return sqlSession.selectList(namespace+"selectList", map);		
+		return sqlSession.selectList(namespace+"selectList", map);
 	}
 
 	@Override
@@ -46,8 +45,7 @@ public class NoticeDAO implements BoardDAO{
 	public int update(BoardDTO boardDTO) throws Exception {
 		return sqlSession.update(namespace+"update", boardDTO);
 	}
-	
-	
+
 	@Override
 	public int delete(int num) throws Exception {
 		return sqlSession.delete(namespace+"delete", num);
@@ -63,6 +61,7 @@ public class NoticeDAO implements BoardDAO{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("kind", rowNum.getKind());
 		map.put("search", rowNum.getSearch());
+		
 		return sqlSession.selectOne(namespace+"totalCount", map);
 	}
 
@@ -70,5 +69,5 @@ public class NoticeDAO implements BoardDAO{
 	public int getNum() throws Exception {
 		return sqlSession.selectOne(namespace+"getNum");
 	}
-	
+
 }
