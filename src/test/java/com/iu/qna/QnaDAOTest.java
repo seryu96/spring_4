@@ -77,7 +77,7 @@ public class QnaDAOTest extends AbstractTest {
 	@Test
 	public void test() {
 		try {
-			this.getNum();
+			this.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -20,13 +20,11 @@ public class NoticeDAOTest extends AbstractTest {
 	@Inject
 	NoticeDAO noticeDAO;
 	
-	@Test
 	public void getNum() throws Exception {
 		int result = noticeDAO.getNum();
 		System.out.println(result);
 	}
 	
-	@Test
 	public void totalCount() throws Exception {
 		RowNum rowNum = new RowNum();
 		rowNum.setStartRow(1);
@@ -37,17 +35,14 @@ public class NoticeDAOTest extends AbstractTest {
 		System.out.println(result);
 	}
 	
-	@Test
 	public void hitUpdate() throws Exception {
 		noticeDAO.hitUpdate(642);
 	}
 	
-	@Test
 	public void delete() throws Exception {
 		noticeDAO.delete(542);
 	}
 	
-	@Test
 	public void update() throws Exception {
 		BoardDTO boardDTO = new NoticeDTO();
 		boardDTO.setTitle("TEST");
@@ -55,7 +50,6 @@ public class NoticeDAOTest extends AbstractTest {
 		noticeDAO.update(boardDTO);
 	}
 	
-	@Test
 	public void insert() throws Exception {
 		BoardDTO boardDTO = new NoticeDTO();
 		boardDTO.setTitle("TEST");
@@ -64,14 +58,12 @@ public class NoticeDAOTest extends AbstractTest {
 		noticeDAO.insert(boardDTO);
 	}
 	
-	@Test
 	public void view() throws Exception {
 		NoticeDTO noticeDTO = (NoticeDTO)noticeDAO.selectOne(618);
 		System.out.println(noticeDTO.getNum());
 		System.out.println(noticeDTO.getTitle());
 	}
 	
-	@Test
 	public void list() throws Exception {
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
 		RowNum rowNum = new RowNum();
@@ -89,7 +81,11 @@ public class NoticeDAOTest extends AbstractTest {
 
 	@Test
 	public void test() {
-		System.out.println("Test");
+		try {
+			this.insert();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Before

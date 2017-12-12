@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="qnaMapper">
-	<select id="selectList" parameterType="java.util.Map" resultType="com.iu.qna.QnaDTO">
+	<select id="selectList" parameterType="map" resultType="QnaDTO">
 		select * from
 		(select rownum R, Q.* from
 		(select * from qna
@@ -18,15 +18,15 @@
 		where R between #{startRow} and #{lastRow} 
 	</select>
 	
-	<select id="selectOne" parameterType="int" resultType="com.iu.qna.QnaDTO">
+	<select id="selectOne" parameterType="int" resultType="QnaDTO">
 		select * from qna where num=#{num}
 	</select>
 	
-	<insert id="insert" parameterType="com.iu.qna.QnaDTO">
+	<insert id="insert" parameterType="QnaDTO">
 		insert into qna values (board_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0, board_seq.currval, 0, 0)
 	</insert>
 	
-	<update id="update" parameterType="com.iu.qna.QnaDTO">
+	<update id="update" parameterType="QnaDTO">
 		update qna set title=#{title}, contents=#{contents} where num=#{num}
 	</update>
 	

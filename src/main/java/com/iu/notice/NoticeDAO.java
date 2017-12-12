@@ -13,7 +13,6 @@ import com.iu.board.BoardDAO;
 import com.iu.board.BoardDTO;
 import com.iu.util.RowNum;
 
-
 @Repository
 public class NoticeDAO implements BoardDAO{
 	
@@ -39,7 +38,8 @@ public class NoticeDAO implements BoardDAO{
 
 	@Override
 	public int insert(BoardDTO boardDTO) throws Exception {
-		return sqlSession.insert(namespace+"insert", boardDTO);
+		int result = sqlSession.insert(namespace+"insert", boardDTO);
+		return result;
 	}
 
 	@Override
