@@ -1,6 +1,7 @@
 package com.iu.s4;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,10 +56,10 @@ public class QnaController {
 	}
 
 	@RequestMapping(value="qnaWrite", method=RequestMethod.POST)
-	public String write(RedirectAttributes ra, QnaDTO boardDTO) {
+	public String write(RedirectAttributes ra, QnaDTO boardDTO, HttpSession session) {
 		String message = "작성에 실패하였습니다.";
 		try {
-			int result = qnaService.insert(boardDTO);
+			int result = qnaService.insert(boardDTO, session);
 			if(result > 0)
 				message = "작성에 성공하였습니다.";
 		} catch (Exception e) {
@@ -109,6 +110,27 @@ public class QnaController {
 			e.printStackTrace();
 		}
 		ra.addFlashAttribute("message", message);
+		return "redirect:./qnaList";
+	}
+	
+	@RequestMapping(value="qnaReply", method=RequestMethod.GET)
+	public String reply(Model model, QnaDTO qnaDTO) {
+		model.addAttribute("board", "qna");
+		return "board/boardWrite";
+	}
+	
+	@RequestMapping(value="qnaReply", method=RequestMethod.POST)
+	public String reply(RedirectAttributes ra, QnaDTO qnaDTO, HttpSession session) {
+		String message = "작성에 실패하였습니다.";
+		try {
+			int result = qnaService.reply(qnaDTO, session);
+			if(result > 0)
+				message = "작성에 성공하였습니다.";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ra.addFlashAttribute("message", message);
+		
 		return "redirect:./qnaList";
 	}
 }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fileMapper">
+	<resultMap type="FileDTO" id="test">
+		<id property="fnum" column="f_num" />
+		<result property="num" column="no" />
+		<result property="fname" column="filename" />
+		<result property="oname" column="oriname" />
+	</resultMap>
+		
+	<resultMap type="com.iu.board.NoticeTestDTO" id="noticeTest">
+		<id property="num" column="num"/>
+		<result property="writer" column="writer"/>
+		<result property="title" column="title"/>
+		<result property="contents" column="contents"/>
+		<association property="fileDTO" javaType="FileDTO" resultMap="fileResult">
+			<!-- <id property="fnum" column="fnum"/>
+			<result property="num" column="num"/>
+			<result property="fname" column="fname"/>
+			<result property="oname" column="oname"/> -->
+		</association>
+	</resultMap>
+	
+	<resultMap type="FileDTO" id="fileResult">
+		<id property="fnum" column="fnum"/>
+		<result property="num" column="num"/>
+		<result property="fname" column="fname"/>
+		<result property="oname" column="oname"/>
+	</resultMap>
+	
+	<resultMap type="NoticeDTO" id="noticeResult">
+		<id property="num" column="num"/>
+		<result property="writer" column="writer"/>
+		<result property="title" column="title"/>
+		<result property="contents" column="contents"/>
+		<collection property="fileNames" javaType="ArrayList" ofType="FileDTO">
+			<id property="fnum" column="fnum"/>
+			<result property="num" column="num"/>
+			<result property="fname" column="fname"/>
+			<result property="oname" column="oname"/>
+		</collection>
+	</resultMap>
+	
+	<select id="selectTest3" resultMap="noticeResult">
+		select n.*, u.* from notice n, upload u where n.num=u.num and n.num=682
+	</select>
+	
+	<select id="selectTest2" parameterType="int" resultMap="noticeTest">
+		select n.*, u.* from notice n, upload u where n.num=u.num and n.num=#{num}
+	</select>
+	
+	<select id="selectTest" parameterType="int" resultMap="test">
+		select fnum f_num, num no, fname filename, oname oriname
+		from upload
+		where num=#{num}
+	</select>
+	
+	<select id="selectList" parameterType="int" resultType="FileDTO">
+		select * from upload where num=#{num}
+	</select>
+	
+	<insert id="insert" parameterType="FileDTO">
+		insert into upload values (board_seq.nextval, #{num}, #{fname}, #{oname})
+	</insert>
+	
+</mapper>
+  	

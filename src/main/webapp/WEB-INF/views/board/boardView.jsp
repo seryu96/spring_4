@@ -29,14 +29,18 @@
 			<td>${view.hit}</td>
 		</tr>
 	</table>
-	<textarea class="form-control" readonly="readonly" rows="" cols="" style="resize: none; height: 500px">${view.contents}</textarea>
+	<textarea class="form-control" readonly="readonly" style="background-color: transparent; resize: none; height: 500px">${view.contents}</textarea>
 	
-	<%--
-	<c:forEach items="${view.ar}" var="file">
-		<a href="../resources/upload/${file.fname}">${file.oname}</a>
+	<c:forEach items="${view.fileNames}" var="file">
+		<a href="../util/download?fileNames=${file.fname}&${file.oname}">${file.oname}</a>
 	</c:forEach>
-	--%>
+	
 	<hr>
+	
+	<c:if test="${board eq 'qna'}">
+		<a href="./qnaReply">Reply</a>
+	</c:if>
+	
 	<a href="./${board}Update?num=${view.num}">Update</a>
 	<a href="./${board}Delete?num=${view.num}">Delete</a>
 	<a href="./${board}List">List</a>

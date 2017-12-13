@@ -69,5 +69,13 @@ public class QnaDAO implements BoardDAO {
 	public int getNum() throws Exception {
 		return sqlSession.selectOne(namespace+"getNum");
 	}
+	
+	public int stepUpdate(QnaDTO qnaDTO) throws Exception {
+		return sqlSession.update(namespace+"stepUpdate", qnaDTO);
+	}
+	
+	public int reply(QnaDTO qnaDTO) throws Exception {
+		return sqlSession.insert(namespace+"reply", qnaDTO);	
+	}
 
 }

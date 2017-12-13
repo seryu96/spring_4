@@ -7,5 +7,6 @@
 		<typeAlias type="com.iu.notice.NoticeDTO" alias="NoticeDTO"/>
 		<typeAlias type="com.iu.qna.QnaDTO" alias="QnaDTO"/>
 		<typeAlias type="java.util.Map" alias="map"/>
+		<typeAlias type="com.iu.file.FileDTO" alias="FileDTO"/>
 	</typeAliases>
 </configuration>

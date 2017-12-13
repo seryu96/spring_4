@@ -1,6 +1,7 @@
 package com.iu.s4;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,10 +55,10 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="noticeWrite", method=RequestMethod.POST)
-	public String write(RedirectAttributes ra, NoticeDTO boardDTO) {
+	public String write(RedirectAttributes ra, NoticeDTO boardDTO, HttpSession session) {
 		String message = "작성에 실패하였습니다.";
 		try {
-			int result = noticeService.insert(boardDTO);
+			int result = noticeService.insert(boardDTO, session);
 			if(result > 0)
 				message = "작성에 성공하였습니다.";
 		} catch (Exception e) {

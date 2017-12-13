@@ -49,7 +49,7 @@
 		$("#add").click(function() {
 			 if(index < 5){
 				var s = '<div id="d'+count+'">';
-				s = s+'<input type="file" name="f1"><span class="del" title="d'+count+'">X</span></div>';
+				s = s+'<input type="file" name="files"><span class="del" title="d'+count+'">X</span></div>';
 				$("#files").append(s);
 				count++;
 				index++;
@@ -58,7 +58,7 @@
 			 }
 		});
 		
-		$("#files").on("click",".del",function(){
+		$("#files").on("click", ".del", function(){
 			var id=$(this).attr("title");
 			$("#"+id).remove();
 			index--;
@@ -81,7 +81,7 @@
 		<h1>QnA Write</h1>
 	</c:if>
 
-	<form id="frm" action="${board}Write" method="post">
+	<form id="frm" action="${board}Write" method="post" enctype="multipart/form-data">
 		<table class="table table-hover">
 			<tr>
 				<td>Title</td>

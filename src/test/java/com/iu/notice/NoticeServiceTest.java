@@ -29,14 +29,14 @@ public class NoticeServiceTest extends AbstractTest {
 		boardDTO.setNum(664);
 		noticeService.update(boardDTO);
 	}
-	
+	/*
 	public void write() throws Exception {
 		BoardDTO boardDTO = new BoardDTO();
 		boardDTO.setTitle("제목");
 		boardDTO.setWriter("작성자");
 		boardDTO.setContents("내용");
-		noticeService.insert(boardDTO);
-	}
+		noticeService.insert(boardDTO, );
+	}*/
 	
 	public void view() throws Exception {
 		BoardDTO boardDTO = noticeService.selectOne(662);
