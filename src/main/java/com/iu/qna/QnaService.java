@@ -72,9 +72,9 @@ public class QnaService implements BoardService {
 	}
 	
 	public int reply(QnaDTO qnaDTO, HttpSession session) throws Exception {
-		MultipartFile[] files = qnaDTO.getFiles();
-		int result = qnaDAO.reply(qnaDTO);
+		qnaDAO.stepUpdate(qnaDTO);
 		
+		MultipartFile[] files = qnaDTO.getFiles();
 		for(MultipartFile multipartFile : files) {
 			FileDTO fileDTO = new FileDTO();
 			fileDTO.setNum(qnaDTO.getNum());
@@ -82,6 +82,7 @@ public class QnaService implements BoardService {
 			fileDTO.setOname(multipartFile.getOriginalFilename());
 			fileDAO.insert(fileDTO);
 		}
+		int result = qnaDAO.reply(qnaDTO);
 		return result;
 	}
 }

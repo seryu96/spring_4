@@ -114,12 +114,19 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value="qnaReply", method=RequestMethod.GET)
-	public String reply(Model model, QnaDTO qnaDTO) {
-		model.addAttribute("board", "qna");
+	public String reply(Model model, int num) {
+		BoardDTO boardDTO = null;
+		try {
+			boardDTO = qnaService.selectOne(num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("view", boardDTO);
+		model.addAttribute("board", "reply");
 		return "board/boardWrite";
 	}
 	
-	@RequestMapping(value="qnaReply", method=RequestMethod.POST)
+	@RequestMapping(value="replyWrite", method=RequestMethod.POST)
 	public String reply(RedirectAttributes ra, QnaDTO qnaDTO, HttpSession session) {
 		String message = "작성에 실패하였습니다.";
 		try {

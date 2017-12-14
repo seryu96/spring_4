@@ -68,7 +68,7 @@
 				<td>${dto.num}</td>
 				<td>
 					<c:catch>
-						<c:forEach begin="1" end="${dto.depth-1}">
+						<c:forEach begin="1" end="${dto.depth}">
 							&nbsp;&nbsp;
 						</c:forEach>
 					</c:catch>

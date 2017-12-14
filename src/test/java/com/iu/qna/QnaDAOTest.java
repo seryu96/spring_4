@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import org.junit.Test;
 
 import com.iu.board.BoardDTO;
+import com.iu.file.FileDTO;
 import com.iu.s4.AbstractTest;
 import com.iu.util.RowNum;
 
@@ -55,8 +56,14 @@ public class QnaDAOTest extends AbstractTest {
 	
 	public void view() throws Exception {
 		BoardDTO boardDTO = qnaDAO.selectOne(610);
-		System.out.println(boardDTO.getNum());
-		System.out.println(boardDTO.getTitle());
+		QnaDTO qnaDTO = (QnaDTO)boardDTO;
+		System.out.println(qnaDTO.getNum());
+		System.out.println(qnaDTO.getTitle());
+		
+		for(FileDTO fileDTO: qnaDTO.getFileNames()) {
+			System.out.println("=======================");
+			System.out.println(fileDTO.getFname());
+		}
 	}
 	
 	public void list() throws Exception {
@@ -77,7 +84,7 @@ public class QnaDAOTest extends AbstractTest {
 	@Test
 	public void test() {
 		try {
-			this.list();
+			this.view();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

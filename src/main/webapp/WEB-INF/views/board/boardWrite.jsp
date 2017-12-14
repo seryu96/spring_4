@@ -93,11 +93,22 @@
 				<td><input class="form-control" type="text" name="writer" placeholder="Writer"></td>
 			</tr>
 		</table>
+		
+		<c:if test="${board eq 'reply'}">
+			<input type="hidden" name="ref" value="${view.ref}" readonly="readonly">
+			<input type="hidden" name="step" value="${view.step}" readonly="readonly">
+			<input type="hidden" name="depth" value="${view.depth}" readonly="readonly">
+		</c:if>
+		
 		<input type="button" value="File Add" id="add">
 		<div id="files"></div>
 		<textarea id="contents" name="contents"></textarea>
-		
-		<button id="savebutton" class="btn btn-primary">Write</button>
+		<c:if test="${board ne 'reply'}">
+			<button id="savebutton" class="btn btn-primary">Write</button>
+		</c:if>
+		<c:if test="${board eq 'reply'}">
+			<button id="savebutton" class="btn btn-primary">Reply</button>
+		</c:if>	
 	</form>
 </body>
 </html>

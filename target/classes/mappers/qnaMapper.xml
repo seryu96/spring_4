@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="qnaMapper">
-	<select id="selectList" parameterType="map" resultType="QnaDTO">
-		select * from
-		(select rownum R, Q.* from
-		(select * from qna
-		<if test="kind == 'title'">
-			where title like '%'||#{search}||'%'
-		</if>
-		<if test="kind == 'writer'">
-			where writer like '%'||#{search}||'%'
-		</if>
-		<if test="kind == 'contents'">
-			where contents like '%'||#{search}||'%'
-		</if>
-		order by num desc, step asc) Q)
-		where R between #{startRow} and #{lastRow} 
+
+	<resultMap type="QnaDTO" id="qnaResult">
+		<id property="num" column="num"/>
+		<collection property="fileNames" column="num" ofType="FileDTO" select="selectFile" />
+	</resultMap>
+	
+	<select id="selectFile" parameterType="int" resultType="FileDTO">
+		select * from upload where num=#{num}
 	</select>
 	
 	<resultMap type="QnaDTO" id="Result">
@@ -32,14 +25,34 @@
 			<result property="oname" column="oname"/>
 		</collection>
 	</resultMap>
+
+	<select id="selectList" parameterType="map" resultType="QnaDTO">
+		select * from
+		(select rownum R, Q.* from
+		(select * from qna
+		<if test="kind == 'title'">
+			where title like '%'||#{search}||'%'
+		</if>
+		<if test="kind == 'writer'">
+			where writer like '%'||#{search}||'%'
+		</if>
+		<if test="kind == 'contents'">
+			where contents like '%'||#{search}||'%'
+		</if>
+		order by ref desc, step asc) Q)
+		where R between #{startRow} and #{lastRow} 
+	</select>
 	
-	<select id="selectOne" parameterType="int" resultMap="Result">
-		<!-- select * from qna where num=#{num} -->
-		select q.*, u.* from qna q, upload u where q.num=u.num and q.num=#{num}
+	<select id="selectOne" parameterType="int" resultMap="qnaResult">
+		select * from qna where num=#{num}
+		<!-- select q.*, u.* from qna q, upload u where q.num=u.num and q.num=#{num} -->
 	</select>
 	
 	<insert id="insert" parameterType="QnaDTO">
-		insert into qna values (board_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0, board_seq.currval, 0, 0)
+		<selectKey keyProperty="num" resultType="int" order="BEFORE">
+			select board_seq.nextval from dual
+		</selectKey>
+		insert into qna values (#{num}, #{title}, #{writer}, #{contents}, sysdate, 0, board_seq.currval, 0, 0)
 	</insert>
 	
 	<update id="update" parameterType="QnaDTO">
@@ -72,11 +85,17 @@
 	</select>
 	
 	<update id="stepUpdate" parameterType="QnaDTO">
-		<![CDATA[update qna set step=step+1 where ref=#{ref} and step>#{step}]]>
+		<![CDATA[
+			update qna set step=step+1 where ref=#{ref} and step>#{step}
+		]]>
 	</update>
 	
 	<insert id="reply" parameterType="QnaDTO">
-		insert into qna values (board_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0, #{ref}, #{step}+1, #{depth}+1)
+		<selectKey keyProperty="num" resultType="int" order="BEFORE">
+			select board_seq.nextval from dual
+		</selectKey>
+		insert into qna values (#{num}, #{title}, #{writer}, #{contents}, sysdate, 0, #{ref}, #{step}+1, #{depth}+1)
 	</insert>
+	
 	
 </mapper>

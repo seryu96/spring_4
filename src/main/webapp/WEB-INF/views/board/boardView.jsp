@@ -32,13 +32,15 @@
 	<textarea class="form-control" readonly="readonly" style="background-color: transparent; resize: none; height: 500px">${view.contents}</textarea>
 	
 	<c:forEach items="${view.fileNames}" var="file">
-		<a href="../util/download?fileNames=${file.fname}&${file.oname}">${file.oname}</a>
+		<%-- <a href="../resources/upload/${file.fname}">${file.oname}</a> --%>
+		<%-- <a href="../file/fileDown?fileName=${file.fileName}&oriName=${file.oriName}">${file.oriName}</a> --%>
+		<a href="../file/fileDownload?fname=${file.fname}&oname=${file.oname}">${file.oname}</a>
 	</c:forEach>
 	
 	<hr>
 	
 	<c:if test="${board eq 'qna'}">
-		<a href="./qnaReply">Reply</a>
+		<a href="./qnaReply?num=${view.num}">Reply</a>
 	</c:if>
 	
 	<a href="./${board}Update?num=${view.num}">Update</a>
