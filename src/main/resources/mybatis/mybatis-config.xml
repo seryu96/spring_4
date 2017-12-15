@@ -6,7 +6,8 @@
 		<typeAlias type="com.iu.board.BoardDTO" alias="BoardDTO"/>
 		<typeAlias type="com.iu.notice.NoticeDTO" alias="NoticeDTO"/>
 		<typeAlias type="com.iu.qna.QnaDTO" alias="QnaDTO"/>
-		<typeAlias type="java.util.Map" alias="map"/>
 		<typeAlias type="com.iu.file.FileDTO" alias="FileDTO"/>
+		<typeAlias type="com.iu.member.MemberDTO" alias="MemberDTO"/>
+		<typeAlias type="java.util.Map" alias="map"/>
 	</typeAliases>
 </configuration>

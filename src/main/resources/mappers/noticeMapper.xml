@@ -39,6 +39,10 @@
 		</selectKey>
 		insert into notice values (#{num}, #{writer}, #{title}, #{contents}, sysdate, 0)
 	</insert>
+	
+	<insert id="memoInsert" parameterType="map">
+		insert into memo values (#{num}, #{title}, #{contents}, sysdate)
+	</insert>
 
 	<update id="update" parameterType="NoticeDTO">
 		update notice set title=#{title}, contents=#{contents} where num=#{num}

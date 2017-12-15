@@ -41,6 +41,10 @@ public class NoticeDAO implements BoardDAO{
 		int result = sqlSession.insert(namespace+"insert", boardDTO);
 		return result;
 	}
+	
+	public int insertMemo(Map<String, Object> map) throws Exception {
+		return sqlSession.insert(namespace+"memoInsert", map);
+	}
 
 	@Override
 	public int update(BoardDTO boardDTO) throws Exception {

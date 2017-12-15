@@ -53,7 +53,7 @@
 				$("#files").append(s);
 				count++;
 				index++;
-			 }else {
+			 } else {
 				 alert("최대 5개의 파일까지만 가능합니다.");
 			 }
 		});

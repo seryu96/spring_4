@@ -8,7 +8,8 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<!-- <bean class="com.iu.aop.CardCheck" id="cardCheck"/>
+	<!--
+	<bean class="com.iu.aop.CardCheck" id="cardCheck"/>
 	<bean class="com.iu.aop.Transport" id="transport"/>
 	
 	<aop:config>
@@ -41,5 +42,6 @@
 	<context:component-scan base-package="com.iu.qna"/>
 	<context:component-scan base-package="com.iu.file"/>	
 	<context:component-scan base-package="com.iu.aop"/>
+	<context:component-scan base-package="com.iu.member"/>
 	
 </beans>

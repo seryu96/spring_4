@@ -17,6 +17,7 @@
 
 <a href="notice/noticeList">Notice</a>
 <a href="qna/qnaList">QnA</a>
+<a href="member/memberJoin">Join</a>
 
 <!-- 
 <div ng-app="">
