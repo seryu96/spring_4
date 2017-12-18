@@ -5,65 +5,68 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-</head>
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$("#id1").blur(function() {
-			var id = $(this).val();
-			$("#btn").on("click", function() {
-				/* $.ajax({
-					url: "../ajax/memberList",
-					type: "get",
-					success: function(data) {
-						$("#result").html(data);
-					}
-				}); */
-				
-				$.get("../ajax/memberList", function(data) {
-					$(data).each(function() {
-						alert(this.id);
-					});
-					
-					/* $("#result").html(data); */
-				}); 
-				
-			})
-			
-			$.get("../ajax/checkId", function(data) {
-				alert(data.id);
-				alert(data.name);
-			});
+		var job="S";
+		
+		$("#join").click(function() {
+			if(job=="S") {
+				$("#T").remove();
+				$("#frm").attr("action", "./student/memberJoin")
+			} else {
+				$("#S").remove();
+				$("#frm").attr("action", "./teacher/memberJoin")
+			}
+			$("#frm").submit();
+		});
+		
+		
+		$(".job").click(function() {
+			job = $(this).val();
+			if(job=='T'){
+				$("#T").css("display","block");
+				$("#S").css("display", "none");
+			}else {
+				$("#T").css("display","none");
+				$("#S").css("display", "block");
+			}
 		});
 	});
-	
-
 </script>
-
-<style>
-	label {
-		float: left;
+<style type="text/css">
+	#T {
+		display: none;
 	}
 </style>
+</head>
 <body>
-<section>
-	<h1 style="text-align: center;">회원가입</h1>
-		<div class="container">
-			<form class="form-horizontal" id="frm" name="frm" action="memberJoin" method="post" style="text-align: center;">
-				<div class="form-group">
-					<label class="control-label " for="pw">아이디</label>
-						<div class="">
-							<input type="text" class="form-control" id="id1" name="id" placeholder="아이디" >
-							<p id="idCheck"></p>	
-						</div>
-					</div>
-					
-			</form>
-			<button id="btn" value="memberList">Go</button>
-			<div id="result"></div>
+	<form id="frm" action="./memberJoin" method="post">
+		<p>ID <input type="text" name="id"></p>
+		<p>Pw <input type="password" name="pw"></p>
+		<p>Name <input type="text" name="name"></p>
+		<p>Age<input type="text" name="age"></p>
+		<p>Phone <input type="text" name="phone"></p>
+		<p>
+		Student <input type="radio" class="job" name="job" checked="checked" value="S">
+		Teacher <input type="radio" class="job" name="job" value="T">
+		</p>
+		<div id="S">
+			<p>TID <input type="text" name="studentDTO.tid"></p>
+			<p>Birth <input type="date" name="studentDTO.birth"></p>
+			<p>Grade <input type="number" name="studentDTO.grade" value="1"></p>
 		</div>
-	</section>
+		<!-- Teacher -->
+		<div id="T">
+			<p>HireDate<input type="date" name="teacherDTO.hiredate"> </p>
+			<p>Subject <input type="text" name="teacherDTO.subject"> </p>
+			<p>Sal <input type="number" name="teacherDTO.sal" value="0">
+		</div>
+		
+		<input type="button" value="join" id="join">
+	
+	</form>
+
+
 </body>
 </html>

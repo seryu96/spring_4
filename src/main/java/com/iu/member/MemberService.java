@@ -15,4 +15,8 @@ public class MemberService {
 	public List<MemberDTO> selectList() {
 		return memberDAO.selectList();
 	}
+	
+	public MemberDTO login(MemberDTO memberDTO) throws Exception {
+		return memberDAO.login(memberDTO);
+	}
 }

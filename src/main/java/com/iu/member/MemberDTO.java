@@ -8,7 +8,10 @@ public class MemberDTO {
 	private String phone;
 	private int age;
 	private String job;
-	
+	/*
+	private StudentDTO studentDTO;
+	private TeacherDTO teacherDTO;
+	*/
 	public String getId() {
 		return id;
 	}
@@ -45,4 +48,17 @@ public class MemberDTO {
 	public void setJob(String job) {
 		this.job = job;
 	}
+/*	public StudentDTO getStudentDTO() {
+		return studentDTO;
+	}
+	public void setStudentDTO(StudentDTO studentDTO) {
+		this.studentDTO = studentDTO;
+	}
+	public TeacherDTO getTeacherDTO() {
+		return teacherDTO;
+	}
+	public void setTeacherDTO(TeacherDTO teacherDTO) {
+		this.teacherDTO = teacherDTO;
+	}*/
+	
 }

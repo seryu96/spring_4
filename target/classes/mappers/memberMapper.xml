@@ -5,4 +5,8 @@
 		select * from member where rownum between 1 and 10
 	</select>
 	
+	<select id="login" parameterType="MemberDTO" resultType="MemberDTO">
+		select * from member where id=#{id} and pw=#{pw}
+	</select>
+	
 </mapper>

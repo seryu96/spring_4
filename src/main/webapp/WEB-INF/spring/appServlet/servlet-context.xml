@@ -18,6 +18,26 @@
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="com.iu.util.FileDownload" id="filedownload"></beans:bean>
 	
+	<beans:bean class="com.iu.interceptor.TeacherInterceptor" id="teacherInterceptor" />
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/notice/noticeWrite" />
+			<mapping path="/qna/qnaWrite"/>
+			<beans:ref bean="teacherInterceptor" />
+		</interceptor>
+	</interceptors>
+	
+	<beans:bean class="com.iu.interceptor.AuthorInterceptor" id="author" />
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/notice/noticeWrite" />
+			<beans:ref bean="author" />
+		</interceptor>
+	</interceptors>
+	
+	
 	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<beans:property name="order" value="0"></beans:property>	
 	</beans:bean>

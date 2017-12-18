@@ -18,4 +18,7 @@ public class MemberDAO {
 		return sqlSession.selectList(NAMESPACE+"selectList");
 	}
 	
+	public MemberDTO login(MemberDTO memberDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"login", memberDTO);
+	}
 }
